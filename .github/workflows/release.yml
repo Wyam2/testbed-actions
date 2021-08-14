@@ -17,5 +17,5 @@ jobs:
         with:
           fetch-depth: 0
       - name: Create packages
-        run: ./build.ps1 -Target Package -ScriptArgs ('--tag={{env.TAG}}')
+        run: ./build.ps1 -Target Package -ScriptArgs ('--tag=${{env.TAG}}')
         shell: pwsh

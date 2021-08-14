@@ -1,0 +1,17 @@
+name: Test release action
+
+on:
+  push:
+    tags:
+      - 'v[0-9]+.[0-9]+.[0-9]+*'
+
+jobs:
+  release:
+    runs-on: windows-latest
+    steps:
+      - name: Get the tag name
+        run: echo "TAG=${GITHUB_REF/refs\/tags\//}" >> $GITHUB_ENV
+        shell: bash
+      - name: Create packages
+        run: ./build.ps1 -Target Package -ScriptArgs ('--tag={{env.TAG}}')
+        shell: pwsh
